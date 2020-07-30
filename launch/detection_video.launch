@@ -1,0 +1,20 @@
+<launch>
+    <arg name="tfile_path"          default="$(find tracker)/weights/detect.tflite"/>
+    <arg name="labels_path"           default="$(find tracker)/weights/labelmap.txt"/>
+    <arg name="input_camera_feed"           default="/camera/image_raw"/>
+    <arg name="detection_threshold" default="0.6" />
+    <arg name="camera_w" default="640" />    
+    <arg name="camera_h" default="480" />
+    <arg name="use_tpu" default="0"/>
+
+    <node pkg="tracker" type="object_detector_video.py" name="object_detector" output="screen">
+    <param name="weights_path"          value="$(arg tfile_path)" />
+    <param name="labels_path"           value="$(arg labels_path)" />
+    <param name="cam_feed"           value="$(arg input_camera_feed)" />
+    <param name="threshold"           value="$(arg detection_threshold)" />
+    <param name="imW"           value="$(arg camera_w)" />
+    <param name="imH"           value="$(arg camera_h)" />
+    <param name="tpu"           value="$(arg use_tpu)" />
+    </node>
+
+</launch>
